@@ -15,20 +15,69 @@ billy = tello.Tello()
 # Put Tello into command mode
 billy.send("command", 3)
 
-#-------------------------------------------takeoff------------------------------
+#--------------------------------------------Manual Control Methods----------------------------------------------------
+#takeoff
 def takeoff():
-    # Send the takeoff command
     billy.send("takeoff", 7)
 
-#-------------------------------------------land------------------------------
+#land
 def land():
-    # Land
     billy.send("land", 3)
 
     # Close the socket
     #billy.sock.close() [Causes error as it is not connected with real drone]
 
-#-------------------------------------------Perimeter sweep----------------------------------------------
+#Pause in Air
+def pause():
+    billy.send("stop", 3)
+
+#Directional Methods
+def forward():
+    billy.send("forward 80", 5)
+
+def back():
+    billy.send("back 80", 5)
+
+def left():
+    billy.send("left 80", 5)
+
+def right():
+    billy.send("right 80", 5)
+
+def up():
+    billy.send("up 50", 5)
+
+def down():
+    billy.send("down 50", 5)
+
+#Flip Methods
+def flipleft():
+    billy.send("flip l", 5)
+
+def flipright():
+    billy.send("flip r", 5)
+
+def flipforward():
+    billy.send("flip f", 5)
+
+def flipback():
+    billy.send("flip b", 5)
+
+#Rotation Methods
+def cw():
+    billy.send("cw 30", 5)
+
+def ccw():
+    billy.send("ccw 30", 5)
+
+#Speed Methods
+def highspeed():
+    billy.send("speed 100", 5)
+
+def lowspeed():
+    billy.send("speed 30", 5)
+
+#------------------------------------------------Perimeter sweep-------------------------------------------------------
 def persweep():
 
     # Travel to/from starting checkpoint 0 from/to the charging base
@@ -81,6 +130,10 @@ def persweep():
     # billy.sock.close() [Causes error as it is not connected with real drone]
     print("Perimeter sweep completed successfully.")
 
+#-------------------------------------------emergency------------------------------
+def emergency():
+    # Send the emergency stop command
+    billy.send("emergency",3)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -331,6 +384,28 @@ class Ui_MainWindow(object):
         self.landbtn.clicked.connect(land)
         # -------------------------------Connecting persweep method to persweep button---------------------------------
         self.peribtn.clicked.connect(persweep)
+        # -------------------------------Connecting emergency method to emergstop button-------------------------------
+        self.emergstopbtn.clicked.connect(emergency)
+        # -------------------------------Connecting pause method to pause button---------------------------------
+        self.pauseBtn.clicked.connect(pause)
+        # -------------------------------Connecting directional method to directional buttons--------------------------
+        self.upbtn.clicked.connect(up)
+        self.downbtn.clicked.connect(down)
+        self.fbtn.clicked.connect(forward)
+        self.bcbtn.clicked.connect(back)
+        self.lbtn.clicked.connect(left)
+        self.rbtn.clicked.connect(right)
+        # -------------------------------Connecting flip methods to flip buttons--------------------------
+        self.flipfwbtn.clicked.connect(flipforward)
+        self.flipbwbtn.clicked.connect(flipback)
+        self.fliprbtn.clicked.connect(flipright)
+        self.fliplbtn.clicked.connect(flipleft)
+        # -------------------------------Connecting Rotation methods to rotation buttons--------------------------
+        self.cwbtn.clicked.connect(cw)
+        self.ccwbtn.clicked.connect(ccw)
+        # -------------------------------Connecting Speed methods to speed buttons--------------------------
+        self.hspeedbtn.clicked.connect(highspeed)
+        self.lspeedbtn.clicked.connect(lowspeed)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
