@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="49187c6d-3bf3-4166-932f-8a38be97335c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testCPUI2.py" beforeDir="false" afterPath="$PROJECT_DIR$/testCPUI2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controlpanelupdated.py" beforeDir="false" afterPath="$PROJECT_DIR$/controlpanelupdated.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCPUI.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCPUI2.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +36,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.testCPUI2">
+  <component name="RunManager" selected="Python.controlpanelupdated">
     <configuration name="controlpanelupdated" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Tello Drone" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,11 +144,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.controlpanelupdated" />
         <item itemvalue="Python.testCPUI2" />
         <item itemvalue="Python.dummyTest" />
         <item itemvalue="Python.testCPUI" />
         <item itemvalue="Python.test2" />
-        <item itemvalue="Python.controlpanelupdated" />
       </list>
     </recent_temporary>
   </component>
@@ -166,22 +170,22 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="172" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1610812996543" />
-    <state width="1515" height="153" key="GridCell.Tab.0.bottom" timestamp="1610885547759">
+    <state width="1515" height="68" key="GridCell.Tab.0.bottom" timestamp="1610908614155">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="153" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1610885547759" />
-    <state width="1515" height="153" key="GridCell.Tab.0.center" timestamp="1610885547759">
+    <state width="1515" height="68" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1610908614155" />
+    <state width="1515" height="68" key="GridCell.Tab.0.center" timestamp="1610908614155">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="153" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1610885547759" />
-    <state width="1515" height="153" key="GridCell.Tab.0.left" timestamp="1610885547759">
+    <state width="1515" height="68" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1610908614155" />
+    <state width="1515" height="68" key="GridCell.Tab.0.left" timestamp="1610908614155">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="153" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1610885547759" />
-    <state width="1515" height="153" key="GridCell.Tab.0.right" timestamp="1610885547759">
+    <state width="1515" height="68" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1610908614155" />
+    <state width="1515" height="68" key="GridCell.Tab.0.right" timestamp="1610908614155">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="153" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1610885547759" />
+    <state width="1515" height="68" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1610908614155" />
     <state x="277" y="60" key="SettingsEditor" timestamp="1610447777284">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
