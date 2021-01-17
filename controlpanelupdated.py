@@ -1,7 +1,10 @@
+import threading
+
 from PyQt5.QtWidgets import QApplication
 
 import tello
 import time
+import cv2
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
@@ -15,7 +18,7 @@ billy = tello.Tello()
 # Put Tello into command mode
 billy.send("command", 3)
 
-#Used for going back
+# Used for going back
 previ = 0
 
 # directional counts
@@ -36,20 +39,19 @@ flpb = 0
 clkw = 0
 cclkw = 0
 
-
-#Check if override button is clicked
+# Check if override button is clicked
 override_chck = 0
 
-#Check if takeoff button is clicked
+# Check if takeoff button is clicked
 takeoff_chck = 0
 
 persweepclicked = 0
 
-#Check if manual control is on or not
+# Check if manual control is on or not
 manucontrol = 1
 
 referarr = []
-referarr2=[]
+referarr2 = []
 print("Drone is in Manual Mode.")
 
 
@@ -89,6 +91,16 @@ class Ui_MainWindow(object):
         print("Multithreading with maximum %d threads" % self.threadpool.maxThreadCount())
 
     # --------------------------------------------Manual Control Methods----------------------------------------------------
+    def streamon(self):
+        billy.send("streamon", 3)
+        billy.stream_state = True
+        billy.video_thread = threading.Thread(target=billy._video_thread)
+        billy.video_thread.daemon = True
+        billy.video_thread.start()
+
+    def streamoff(self):
+        billy.send("streamoff", 3)
+
     # takeoff
     def takeoff(self):
         billy.send("takeoff", 7)
@@ -310,6 +322,11 @@ class Ui_MainWindow(object):
 
     # ----------------------------- Overriding perimeter sweep and also going back to the place where drone stopped------------------------------
     def override(self):
+        global referarr2
+        referarr2=[]
+        if persweepclicked == 0:
+            print("Nothing to override.")
+            return
         global referarr
         global override_chck
         global previ
@@ -319,10 +336,10 @@ class Ui_MainWindow(object):
         elif override_chck == 1:
             override_chck = 0
             print()
-            print("i was "+str(previ))
+            print("i was " + str(previ))
             print("Going back to the point where perimeter sweep was overriden.")
             referarr.reverse()
-            for r in range(0,len(referarr)):
+            for r in range(0, len(referarr)):
                 if referarr[r] == "u":
                     self.down()
                 elif referarr[r] == "d":
@@ -348,15 +365,18 @@ class Ui_MainWindow(object):
                 elif referarr[r] == "flpr":
                     self.flipleft()
             print("Reached the point where perimeter sweep was overriden.")
-            referarr=[]
+            referarr = []
             print()
             print("Continuing perimeter sweep.")
             self.persweepcont_exec()
 
     # ------------------------------------------------Perimeter sweep-------------------------------------------------------
     def persweep(self):
+        global persweepclicked
+        persweepclicked = 1
         global previ
         global referarr2
+        global referarr
         print()
         print("Manual Mode switched off.")
         print("Manual Controls locked.")
@@ -367,7 +387,7 @@ class Ui_MainWindow(object):
             print()
             print("Going back to the starting point.")
             referarr2.reverse()
-            for r in range(0,len(referarr2)):
+            for r in range(0, len(referarr2)):
                 if referarr2[r] == "u":
                     self.down()
                 elif referarr2[r] == "d":
@@ -393,7 +413,8 @@ class Ui_MainWindow(object):
                 elif referarr2[r] == "flpr":
                     self.flipleft()
             print("Reached the starting point.")
-            referarr2=[]
+            referarr2 = []
+            print(referarr2)
             print()
 
         manucontrol -= 1
@@ -430,8 +451,7 @@ class Ui_MainWindow(object):
                 return
             if i == len(checkpoint) - 1:
                 print("Returning to Checkpoint 0. \n")
-                previ=0
-
+                previ = 0
 
             billy.send(checkpoint[i][1] + " " + str(checkpoint[i][2]), 4)
             billy.send(checkpoint[i][3] + " " + str(checkpoint[i][4]), 4)
@@ -459,6 +479,9 @@ class Ui_MainWindow(object):
         print("Autonomous mode switched off.")
         print("You are now in manual mode.")
         manucontrol += 1
+        persweepclicked = 0
+        referarr2=[]
+        referarr=[]
 
     def persweep_exec(self):
         # Pass the function to execute
@@ -468,6 +491,8 @@ class Ui_MainWindow(object):
         self.threadpool.start(worker)
 
     def persweepcontinue(self):
+        global referarr
+        global referarr2
         global previ
         # Travel to/from starting checkpoint 0 from/to the charging base
         frombase = ["forward", 50, "ccw", 150]
@@ -478,10 +503,10 @@ class Ui_MainWindow(object):
                       [4, "ccw", 90, "forward", 40], [5, "cw", 90, "forward", 60], [0, "ccw", 90, "forward", 40]]
         i = previ
         print("Current location: Checkpoint " + str(checkpoint[i][0]) + "\n")
-        i+=1
+        i += 1
         # Billy's flight path
         while i < len(checkpoint):
-            print("test i"+str(i))
+            print("test i" + str(i))
             if i == len(checkpoint) - 1:
                 print("Returning to Checkpoint 0. \n")
 
@@ -489,7 +514,7 @@ class Ui_MainWindow(object):
             billy.send(checkpoint[i][3] + " " + str(checkpoint[i][4]), 4)
 
             print("Arrived at current location: Checkpoint " + str(checkpoint[i][0]) + "\n")
-            i+=1
+            i += 1
             time.sleep(4)
 
         # Reach back at Checkpoint 0
@@ -507,6 +532,12 @@ class Ui_MainWindow(object):
         # Close the socket
         # billy.sock.close() [Causes error as it is not connected with real drone]
         print("Perimeter sweep completed successfully.")
+        print("Autonomous mode switched off.")
+        print("You are now in manual mode.")
+        global persweepclicked
+        persweepclicked = 0
+        referarr2=[]
+        referarr=[]
 
     def persweepcont_exec(self):
         # Pass the function to execute
@@ -514,6 +545,7 @@ class Ui_MainWindow(object):
 
         # Execute
         self.threadpool.start(worker)
+
     # -------------------------------------------emergency------------------------------
     def emergency(self):
         if manucontrol == 1 or override_chck == 1:
@@ -796,6 +828,10 @@ class Ui_MainWindow(object):
 
         # -------------------------------Connecting override method to override button--------------------------
         self.overrbtn.clicked.connect(self.override)
+
+        # --------------------------------Video Streaming--------------------------------------------------------
+        self.envidbtn.clicked.connect(self.streamon)
+        self.disvidbtn.clicked.connect(self.streamoff)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

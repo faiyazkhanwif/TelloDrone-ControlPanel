@@ -3,7 +3,7 @@
 import socket
 import threading
 import time
-
+import cv2
 
 class Tello():
 
@@ -52,4 +52,28 @@ class Tello():
                 print("Error receiving: " + str(e))
             break
 
+    def _receive_thread(self):
+        while True:
+            # Checking for Tello response, throws socket error
+            try:
+                self.response, ip = self.socket.recvfrom(1024)
+                self.log[-1].add_response(self.response)
+            except socket.error as exc:
+                print('Socket error: {}'.format(exc))
 
+    def _video_thread(self):
+        print("receiving video thread")
+        # Creating stream capture object
+        # cap = cv2.VideoCapture('udp://@'+self.tello_ip+':11111')
+        cap = cv2.VideoCapture(0)
+        # Runs while 'stream_state' is True
+        while self.stream_state:
+            ret, frame = cap.read()
+            cv2.imshow('DJI Tello', frame)
+
+            # Video Stream is closed if escape key is pressed
+            k = cv2.waitKey(1) & 0xFF
+            if k == 27:
+                break
+        cap.release()
+        cv2.destroyAllWindows()
