@@ -106,11 +106,13 @@ class Ui_MainWindow(object):
         billy.send("takeoff", 7)
         global takeoff_chck
         takeoff_chck = 1
+        print("Drone has taken off successfully.")
 
     # land
     def land(self):
         if manucontrol == 1 or override_chck == 1:
             billy.send("land", 3)
+            print("Drone has landed successfully.")
         else:
             print("You are in Autonomous mode.")
 
@@ -121,6 +123,7 @@ class Ui_MainWindow(object):
     def stopinair(self):
         if manucontrol == 1 or override_chck == 1:
             billy.send("stop", 3)
+            print("Drone is paused in air.")
         else:
             print("You are in Autonomous mode.")
 
@@ -131,10 +134,12 @@ class Ui_MainWindow(object):
             forwardcount += 1
             referarr.append("f")
             billy.send("forward 80", 5)
+            print("Drone has moved forward.")
             return
         elif manucontrol == 1:
             referarr2.append("f")
             billy.send("forward 80", 5)
+            print("Drone has moved forward.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -146,10 +151,12 @@ class Ui_MainWindow(object):
             backwardcount += 1
             referarr.append("b")
             billy.send("back 80", 5)
+            print("Drone has moved backward.")
             return
         elif manucontrol == 1:
             referarr2.append("b")
             billy.send("back 80", 5)
+            print("Drone has moved backward.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -161,10 +168,12 @@ class Ui_MainWindow(object):
             leftcount += 1
             referarr.append("l")
             billy.send("left 80", 5)
+            print("Drone has moved left.")
             return
         elif manucontrol == 1:
             referarr2.append("l")
             billy.send("left 80", 5)
+            print("Drone has moved left.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -176,10 +185,12 @@ class Ui_MainWindow(object):
             referarr.append("r")
             rightcount += 1
             billy.send("right 80", 5)
+            print("Drone has moved right.")
             return
         elif manucontrol == 1:
             referarr2.append("r")
             billy.send("right 80", 5)
+            print("Drone has moved right.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -191,10 +202,12 @@ class Ui_MainWindow(object):
             upcount += 1
             referarr.append("u")
             billy.send("up 50", 5)
+            print("Drone has moved up.")
             return
         elif manucontrol == 1:
             referarr2.append("u")
             billy.send("up 50", 5)
+            print("Drone has moved up.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -206,10 +219,12 @@ class Ui_MainWindow(object):
             downcount += 1
             referarr.append("d")
             billy.send("down 50", 5)
+            print("Drone has moved down.")
             return
         elif manucontrol == 1:
             referarr2.append("d")
             billy.send("down 50", 5)
+            print("Drone has moved down.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -222,10 +237,12 @@ class Ui_MainWindow(object):
             flpl += 1
             referarr.append("flpl")
             billy.send("flip l", 5)
+            print("Drone has flipped left.")
             return
         elif manucontrol == 1:
             referarr2.append("flpl")
             billy.send("flip l", 5)
+            print("Drone has flipped left.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -237,10 +254,12 @@ class Ui_MainWindow(object):
             flpr += 1
             referarr.append("flpr")
             billy.send("flip r", 5)
+            print("Drone has flipped right.")
             return
         elif manucontrol == 1:
             referarr2.append("flpr")
             billy.send("flip r", 5)
+            print("Drone has flipped right.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -252,10 +271,12 @@ class Ui_MainWindow(object):
             flpf += 1
             referarr.append("flpf")
             billy.send("flip f", 5)
+            print("Drone has flipped forward.")
             return
         elif manucontrol == 1:
             referarr2.append("flpf")
             billy.send("flip f", 5)
+            print("Drone has flipped forward.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -267,10 +288,12 @@ class Ui_MainWindow(object):
             flpb += 1
             referarr.append("flpb")
             billy.send("flip b", 5)
+            print("Drone has flipped back.")
             return
         elif manucontrol == 1:
             referarr2.append("flpb")
             billy.send("flip b", 5)
+            print("Drone has flipped back.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -283,10 +306,12 @@ class Ui_MainWindow(object):
             clkw += 1
             referarr.append("clkw")
             billy.send("cw 30", 5)
+            print("Drone has moved clock wise 30 degrees.")
             return
         elif manucontrol == 1:
             referarr2.append("clkw")
             billy.send("cw 30", 5)
+            print("Drone has moved clock wise 30 degrees.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -298,10 +323,12 @@ class Ui_MainWindow(object):
             cclkw += 1
             referarr.append("cclkw")
             billy.send("ccw 30", 5)
+            print("Drone has moved counter clock wise 30 degrees.")
             return
         elif manucontrol == 1:
             referarr2.append("cclkw")
             billy.send("ccw 30", 5)
+            print("Drone has moved counter clock wise 30 degrees.")
             return
         elif manucontrol == 0:
             print("You are in Autonomous mode.")
@@ -311,12 +338,14 @@ class Ui_MainWindow(object):
     def highspeed(self):
         if manucontrol == 1 or override_chck == 1:
             billy.send("speed 100", 5)
+            print("Speed of drone is set to high.")
         else:
             print("You are in Autonomous mode.")
 
     def lowspeed(self):
         if manucontrol == 1 or override_chck == 1:
             billy.send("speed 30", 5)
+            print("Speed of drone is set to low.")
         else:
             print("You are in Autonomous mode.")
 
@@ -336,7 +365,7 @@ class Ui_MainWindow(object):
         elif override_chck == 1:
             override_chck = 0
             print()
-            print("i was " + str(previ))
+            #print("i was " + str(previ))
             print("Going back to the point where perimeter sweep was overriden.")
             referarr.reverse()
             for r in range(0, len(referarr)):
@@ -845,7 +874,7 @@ class Ui_MainWindow(object):
         self.labelmanu.setText(_translate("MainWindow", "Control Panel"))
         self.envidbtn.setText(_translate("MainWindow", "Enable Video Stream"))
         self.takeoffbtn.setText(_translate("MainWindow", "TAKEOFF"))
-        self.emergstopbtn.setText(_translate("MainWindow", "Emergency stop"))
+        self.emergstopbtn.setText(_translate("MainWindow", "Stop"))
         self.upbtn.setText(_translate("MainWindow", "UP"))
         self.downbtn.setText(_translate("MainWindow", "Down"))
         self.cwbtn.setText(_translate("MainWindow", "CW"))
