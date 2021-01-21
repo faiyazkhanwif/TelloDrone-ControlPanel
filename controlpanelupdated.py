@@ -535,7 +535,7 @@ class Ui_MainWindow(object):
         i += 1
         # Billy's flight path
         while i < len(checkpoint):
-            print("test i" + str(i))
+            #print("test i" + str(i))
             if i == len(checkpoint) - 1:
                 print("Returning to Checkpoint 0. \n")
 
@@ -870,7 +870,7 @@ class Ui_MainWindow(object):
         self.rbtn.setText(_translate("MainWindow", "RIGHT"))
         self.lbtn.setText(_translate("MainWindow", "LEFT"))
         self.peribtn.setText(_translate("MainWindow", "PERIMETER SWEEP"))
-        self.overrbtn.setText(_translate("MainWindow", "OVERRIDE ROUT"))
+        self.overrbtn.setText(_translate("MainWindow", "OVERRIDE ROUTE"))
         self.labelmanu.setText(_translate("MainWindow", "Control Panel"))
         self.envidbtn.setText(_translate("MainWindow", "Enable Video Stream"))
         self.takeoffbtn.setText(_translate("MainWindow", "TAKEOFF"))
